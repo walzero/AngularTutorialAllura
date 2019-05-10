@@ -6,6 +6,11 @@ var campos = [
 
 console.log(campos);
 
+var dBody = document.body;
+document.body.style.color = '#FFFFFF';
+dBody.style.backgroundColor = '#484747';
+
+
 var tbody = document.querySelector('table tbody');
 
 document.querySelector('.form').addEventListener('submit', function(event) {
