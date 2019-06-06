@@ -29,6 +29,26 @@ class NegociacaoController {
         this._mensagem.texto = "Negociações apagadas com sucesso!";
     }
 
+    /*  AJAX
+                0: requisição ainda não iniciada
+                1: conexão com o servidor estabelecida
+                2: requisição recebida
+                3: processando requisição
+                4: requisição está concluída e a resposta está pronta
+            */
+    importarNegociacoes() {
+        let service = new NegociacaoService();
+        service.obterNegociacoesDaSemana((erro, negociacoes) => {
+            if (erro) {
+                this._mensagem.texto = erro;
+                return;
+            }
+
+            negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = 'Negociações importadas com sucesso!';
+        });
+    }
+
     _criaNegociacao() {
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
